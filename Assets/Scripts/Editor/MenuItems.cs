@@ -12,17 +12,17 @@ namespace Netch.UtilityScripts {
 
 		[MenuItem("Assets/UtilityScripts/Red", false, rightClickMenuPriority)]
 		private static void Red() {
-			Debug.Log("Colouring the folder red");
+			ColouredFolderEditor.SetIconName("Red");
 		}
 
 		[MenuItem("Assets/UtilityScripts/Green", false, rightClickMenuPriority)]
 		private static void Green() {
-			Debug.Log("Colouring the folder green");
+			ColouredFolderEditor.SetIconName("Green");
 		}
 
 		[MenuItem("Assets/UtilityScripts/Blue", false, rightClickMenuPriority)]
 		private static void Blue() {
-			Debug.Log("Colouring the folder blue");
+			ColouredFolderEditor.SetIconName("Blue");
 		}
 
 		[MenuItem("Assets/UtilityScripts/Custom Icon...", false, rightClickMenuPriority + separatorPriorityDifference)]
