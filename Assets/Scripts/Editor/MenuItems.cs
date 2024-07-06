@@ -32,7 +32,7 @@ namespace Netch.UtilityScripts {
 
 		[MenuItem("Assets/UtilityScripts/Reset Icon", false, rightClickMenuPriority + (separatorPriorityDifference * 2))]
 		private static void ResetIcon() {
-			Debug.Log("Reset the folder icon");
+			ColouredFolderEditor.ResetIconName();
 		}
 
 		[MenuItem("Assets/UtilityScripts/Red", true)]

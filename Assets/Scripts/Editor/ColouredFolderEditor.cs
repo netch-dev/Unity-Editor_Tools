@@ -57,8 +57,8 @@ namespace Netch.UtilityScripts {
 
 		public static void SetIconName(string newIconName) {
 			string folderPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-			//string folderGuid = AssetDatabase.AssetPathToGUID(folderPath);
-			string folderGuid = AssetDatabase.GUIDFromAssetPath(folderPath).ToString();
+			string folderGuid = AssetDatabase.AssetPathToGUID(folderPath);
+			//string folderGuid = AssetDatabase.GUIDFromAssetPath(folderPath).ToString();
 
 			string iconPath = $"Assets/Icons/Colored/{newIconName}.png";
 			string iconGuid = AssetDatabase.GUIDFromAssetPath(iconPath).ToString();
@@ -66,6 +66,14 @@ namespace Netch.UtilityScripts {
 			EditorPrefs.SetString(folderGuid, iconGuid);
 
 			//_iconName = newIconName;
+		}
+
+		public static void ResetIconName() {
+			string folderPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+			string folderGuid = AssetDatabase.AssetPathToGUID(folderPath);
+			//string folderGuid = AssetDatabase.GUIDFromAssetPath(folderPath).ToString();
+
+			EditorPrefs.DeleteKey(folderGuid);
 		}
 	}
 }
