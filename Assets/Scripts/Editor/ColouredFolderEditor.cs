@@ -23,7 +23,7 @@ namespace Netch.UtilityScripts {
 						if (activeObjectGuid != guid) return;*/
 
 			string iconGuid = EditorPrefs.GetString(guid, "");
-			if (iconGuid == "") return;
+			if (string.IsNullOrEmpty(iconGuid) || iconGuid == "0000000000000000f000000000000000") return;
 
 			EditorGUI.DrawRect(folderRect, backgroundColour); // Draw a dark background to cover the default icon
 

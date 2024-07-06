@@ -27,7 +27,7 @@ namespace Netch.UtilityScripts {
 
 		[MenuItem("Assets/UtilityScripts/Custom Icon...", false, rightClickMenuPriority + separatorPriorityDifference)]
 		private static void Custom() {
-			Debug.Log("Choosing a custom icon");
+			IconFolderEditor.ChooseCustomIcon();
 		}
 
 		[MenuItem("Assets/UtilityScripts/Reset Icon", false, rightClickMenuPriority + (separatorPriorityDifference * 2))]
