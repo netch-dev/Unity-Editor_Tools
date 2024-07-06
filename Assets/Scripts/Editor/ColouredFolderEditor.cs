@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,8 +13,30 @@ namespace Netch.UtilityScripts {
 		}
 
 		private static void OnGUI(string guid, Rect selectionRect) {
+			Color backgroundColour;
+			Rect folderRect = GetFolderRect(selectionRect, out backgroundColour);
+
+			/*			if (Selection.activeObject == null) return;
+
+						string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+						string activeObjectGuid = AssetDatabase.GUIDFromAssetPath(assetPath).ToString();
+						if (activeObjectGuid != guid) return;*/
+
+			string iconGuid = EditorPrefs.GetString(guid, "");
+			if (iconGuid == "") return;
+
+			EditorGUI.DrawRect(folderRect, backgroundColour); // Draw a dark background to cover the default icon
+
+			string folderTexturePath = AssetDatabase.GUIDToAssetPath(iconGuid);
+			Texture2D folderTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(folderTexturePath);
+			GUI.DrawTexture(folderRect, folderTexture);
+
+			//EditorGUI.DrawRect(selectionRect, Color.red);
+		}
+
+		private static Rect GetFolderRect(Rect selectionRect, out Color backgroundColour) {
 			Rect folderRect;
-			Color backgroundColor = new Color(0.2f, 0.2f, 0.2f);
+			backgroundColour = new Color(0.2f, 0.2f, 0.2f);
 
 			if (selectionRect.x < 15) {
 				// Second column, small scale
@@ -24,28 +45,27 @@ namespace Netch.UtilityScripts {
 			} else if (selectionRect.x >= 15 && selectionRect.height < 30) {
 				// First column
 				folderRect = new Rect(selectionRect.x, selectionRect.y, selectionRect.height, selectionRect.height);
-				backgroundColor = new Color(0.22f, 0.22f, 0.22f);
+				backgroundColour = new Color(0.22f, 0.22f, 0.22f);
 
 			} else {
 				// Second column, large scale
 				folderRect = new Rect(selectionRect.x, selectionRect.y, selectionRect.width, selectionRect.width);
 			}
 
-			if (Selection.activeObject == null) return;
-
-			string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-			string activeObjectGuid = AssetDatabase.GUIDFromAssetPath(assetPath).ToString();
-			if (activeObjectGuid != guid) return;
-
-			EditorGUI.DrawRect(folderRect, backgroundColor); // Overlay a dark background to cover the previous icon
-			Texture2D folderTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"Assets/Icons/Colored/{_iconName}.png");
-			GUI.DrawTexture(folderRect, folderTexture);
-
-			//EditorGUI.DrawRect(selectionRect, Color.red);
+			return folderRect;
 		}
 
 		public static void SetIconName(string newIconName) {
-			_iconName = newIconName;
+			string folderPath = AssetDatabase.GetAssetPath(Selection.activeObject);
+			//string folderGuid = AssetDatabase.AssetPathToGUID(folderPath);
+			string folderGuid = AssetDatabase.GUIDFromAssetPath(folderPath).ToString();
+
+			string iconPath = $"Assets/Icons/Colored/{newIconName}.png";
+			string iconGuid = AssetDatabase.GUIDFromAssetPath(iconPath).ToString();
+
+			EditorPrefs.SetString(folderGuid, iconGuid);
+
+			//_iconName = newIconName;
 		}
 	}
 }
