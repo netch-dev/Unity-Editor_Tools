@@ -1,11 +1,11 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 
 // To select an icon for the folder use the object picker:
 // https://docs.unity3d.com/ScriptReference/EditorGUIUtility.ShowObjectPicker.html
 
 #if UNITY_EDITOR
+using UnityEditor;
+
 namespace Netch.UtilityScripts {
 	[InitializeOnLoad] // Attribute to edit folders whenever we load unity or anything changes
 	internal static class IconFolderEditor {
@@ -27,9 +27,7 @@ namespace Netch.UtilityScripts {
 				string selectedObjectPath = AssetDatabase.GetAssetPath(selectedObject);
 				string folderTextureGuid = AssetDatabase.AssetPathToGUID(selectedObjectPath);
 
-				Debug.Log(folderTextureGuid);
-
-				EditorPrefs.SetString(selectedFolderGuid, folderTextureGuid);
+				UtilityScriptPrefs.SetString(selectedFolderGuid, folderTextureGuid);
 			}
 		}
 

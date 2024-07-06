@@ -1,9 +1,10 @@
-using UnityEditor;
 using UnityEngine;
 
 // Menu Item - https://docs.unity3d.com/ScriptReference/MenuItem.html
 
 #if UNITY_EDITOR
+using UnityEditor;
+
 namespace Netch.UtilityScripts {
 	internal static class MenuItems {
 
