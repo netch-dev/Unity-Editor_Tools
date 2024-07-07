@@ -49,6 +49,22 @@ namespace Netch.UtilityScripts {
 			string objectPath = AssetDatabase.GetAssetPath(selectedObject);
 			return AssetDatabase.IsValidFolder(objectPath);
 		}
+
+		// Create a new gameobject from a menu item
+		[MenuItem("GameObject/Custom GO")]
+		private static void CreateCustomGO() {
+			GameObject go = new GameObject("Custom GO");
+
+			Rigidbody rb = go.AddComponent<Rigidbody>();
+			rb.mass = 225;
+		}
+
+		// Update the mass of the selected Rigidbody
+		[MenuItem("CONTEXT/Rigidbody/Triple Mass")]
+		private static void TripleMass(MenuCommand menuCommand) {
+			Rigidbody rb = menuCommand.context as Rigidbody;
+			rb.mass *= 3;
+		}
 	}
 }
 #endif
