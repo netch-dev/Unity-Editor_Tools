@@ -1,7 +1,7 @@
 public class Todo {
-	/* ===============
+	/* ===================================================================
 	 * Brainstorm:
-     * ===============
+     * ===================================================================
      * 1. Change the colour of a folder
      * -  Right click on a folder and see a list of colours
      * -- Using MenuItems, an editor class that allows you to display menus
@@ -21,6 +21,10 @@ public class Todo {
      * -- Save data using GUIDs (Global Unique Identifiers)
      * --- Every folder and icon has a GUID
      * ---- Data structure: Dictionary<string, string> where the key is the GUID of the folder and the value is the GUID of the icon
+     *
+     * ===================================================================
+     * ===================================================================
+     * ===================================================================
      *
      * 5. Custom Hierarchy Tools - To each object in the hierarchy, add:
      * 5.1 Checkbox to deactive and activate them
@@ -59,12 +63,13 @@ public class Todo {
      * 14. UI Aspect Ratio Test
      * - Automatically test aspect ratios of the game and save a screenshot of each
      *
-     * ===============
+     * ===================================================================
      * Notes:
-     * ===============
+     * ===================================================================
      * 1. Name the editor script folder "Editor", so that the scripts aren't built into the final game
      * - https://docs.unity3d.com/Manual/SpecialFolders.html
-     *
+     * 
+     * 2. 
      *
      */
 }

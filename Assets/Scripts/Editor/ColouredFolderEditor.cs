@@ -11,7 +11,7 @@ namespace Netch.UtilityScripts {
 			EditorApplication.projectWindowItemOnGUI += OnGUI;
 		}
 
-		private static void OnGUI(string guid, Rect selectionRect) {
+		public static void OnGUI(string guid, Rect selectionRect) {
 			Color backgroundColour;
 			Rect folderRect = GetFolderRect(selectionRect, out backgroundColour);
 

@@ -12,27 +12,27 @@ namespace Netch.UtilityScripts {
 		private const int separatorPriorityDifference = 11; // Need at least 11 priority difference to add a line separator between menu items
 
 		[MenuItem("Assets/UtilityScripts/Red", false, rightClickMenuPriority)]
-		private static void Red() {
+		public static void Red() {
 			ColouredFolderEditor.SetIconName("Red");
 		}
 
 		[MenuItem("Assets/UtilityScripts/Green", false, rightClickMenuPriority)]
-		private static void Green() {
+		public static void Green() {
 			ColouredFolderEditor.SetIconName("Green");
 		}
 
 		[MenuItem("Assets/UtilityScripts/Blue", false, rightClickMenuPriority)]
-		private static void Blue() {
+		public static void Blue() {
 			ColouredFolderEditor.SetIconName("Blue");
 		}
 
 		[MenuItem("Assets/UtilityScripts/Custom Icon...", false, rightClickMenuPriority + separatorPriorityDifference)]
-		private static void Custom() {
+		public static void Custom() {
 			IconFolderEditor.ChooseCustomIcon();
 		}
 
 		[MenuItem("Assets/UtilityScripts/Reset Icon", false, rightClickMenuPriority + (separatorPriorityDifference * 2))]
-		private static void ResetIcon() {
+		public static void ResetIcon() {
 			ColouredFolderEditor.ResetIconName();
 		}
 
@@ -41,7 +41,7 @@ namespace Netch.UtilityScripts {
 		[MenuItem("Assets/UtilityScripts/Blue", true)]
 		[MenuItem("Assets/UtilityScripts/Custom Icon...", true)]
 		[MenuItem("Assets/UtilityScripts/Reset Icon", true)]
-		private static bool ValidateFolder() {
+		public static bool ValidateFolder() {
 			if (Selection.activeObject == null) return false;
 
 			Object selectedObject = Selection.activeObject;
@@ -52,7 +52,7 @@ namespace Netch.UtilityScripts {
 
 		// Create a new gameobject from a menu item
 		[MenuItem("GameObject/Custom GO")]
-		private static void CreateCustomGO() {
+		public static void CreateCustomGO() {
 			GameObject go = new GameObject("Custom GO");
 
 			Rigidbody rb = go.AddComponent<Rigidbody>();
@@ -61,7 +61,7 @@ namespace Netch.UtilityScripts {
 
 		// Update the mass of the selected Rigidbody
 		[MenuItem("CONTEXT/Rigidbody/Triple Mass")]
-		private static void TripleMass(MenuCommand menuCommand) {
+		public static void TripleMass(MenuCommand menuCommand) {
 			Rigidbody rb = menuCommand.context as Rigidbody;
 			rb.mass *= 3;
 		}
