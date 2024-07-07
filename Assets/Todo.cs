@@ -22,6 +22,43 @@ public class Todo {
      * --- Every folder and icon has a GUID
      * ---- Data structure: Dictionary<string, string> where the key is the GUID of the folder and the value is the GUID of the icon
      *
+     * 5. Custom Hierarchy Tools - To each object in the hierarchy, add:
+     * 5.1 Checkbox to deactive and activate them
+     * 5.2 Info icon that display infromation when the cursor hovers over it
+     * 5.3 Button to focus on each object
+     * 5.4 Button to turn the gameobject into a prefab
+     * 5.5 Button to delete the gameobject
+     *
+     * 6. Batch Rename Tool
+     * - Select multiple objects and rename them using a name and starting number
+     * -- Example: "Enemy" and "1" will rename the objects to "Enemy_1", "Enemy_2", "Enemy_3", etc
+     * --- Use the EditorGuiLayout class
+     * 
+     * 7. Create a tool that detects missing references in the scene
+     * 
+     * 8. Auto linking tool
+     * - Use the name of gameobjects and fields in the inspect to link them. Reduces time spent dragging fields in the inspector
+     * 
+     * 9. File Organizer
+     * - Automatically move specific types of files into specific folders
+     * -- Using the GuiLayoutToolbar class. Also popups and object fields from the EditorGuiLayout class
+     * 
+     * 10. Auto Save Tool
+     * - Editor window that allows you to set a time interval
+     * -- Use the EditorPref and EditorSceneManager classes
+     * 
+     * 11. Favorites Tool
+     * - Each object in the hierarchy has a star icon that allows you to mark it as a favorite
+     * -- Create a favorites menu that displays all the favorites and allows you to create copies of them
+     * 
+     * 12. Create a custom tool menu
+     * 
+     * 13. Art Asset Optimizer
+     * - Automatically optimize the settings and file size of art assets with the click of a button
+     * 
+     * 14. UI Aspect Ratio Test
+     * - Automatically test aspect ratios of the game and save a screenshot of each
+     *
      * ===============
      * Notes:
      * ===============
