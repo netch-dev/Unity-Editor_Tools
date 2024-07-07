@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 
+// Probably don't need this editor check since it's in an Editor folder but I'll keep it for now
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -18,6 +19,8 @@ namespace Netch.UtilityScripts {
 			DrawInfoButton(instanceID, selectionRect, string.Empty);
 
 			DrawZoomInButton(instanceID, selectionRect, "Focus this game object");
+
+			DrawCreatePrefabButton(instanceID, selectionRect, "Save as prefab");
 		}
 
 		private static Rect DrawRect(float x, float y, float size) {
@@ -92,6 +95,25 @@ namespace Netch.UtilityScripts {
 			DrawButtonWithTexture(rect.x + 170, rect.y + 2, 14, "zoom_in", () => {
 				Selection.activeGameObject = gameObject;
 				SceneView.FrameLastActiveSceneView();
+			}, gameObject, tooltip);
+		}
+		#endregion
+
+		#region Create Prefab Button
+		private static void DrawCreatePrefabButton(int id, Rect rect, string tooltip) {
+			GameObject gameObject = EditorUtility.InstanceIDToObject(id) as GameObject;
+			if (gameObject == null) return;
+
+			DrawButtonWithTexture(rect.x + 190, rect.y + 2, 14, "prefab", () => {
+				const string pathToPrefabsFolder = "Assets/Prefabs";
+				bool doesPrefabsFolderExist = AssetDatabase.IsValidFolder(pathToPrefabsFolder);
+				if (!doesPrefabsFolderExist) AssetDatabase.CreateFolder("Assets", "Prefabs");
+
+				string prefabName = gameObject.name + ".prefab";
+				string prefabPath = pathToPrefabsFolder + "/" + prefabName;
+				AssetDatabase.DeleteAsset(prefabName);
+				GameObject prefab = PrefabUtility.SaveAsPrefabAsset(gameObject, prefabPath);
+				EditorGUIUtility.PingObject(prefab);
 			}, gameObject, tooltip);
 		}
 		#endregion
