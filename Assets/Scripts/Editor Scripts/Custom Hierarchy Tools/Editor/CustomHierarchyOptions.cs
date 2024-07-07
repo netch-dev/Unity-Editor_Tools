@@ -113,7 +113,7 @@ namespace Netch.UtilityScripts {
 
 				string prefabName = gameObject.name + ".prefab";
 				string prefabPath = pathToPrefabsFolder + "/" + prefabName;
-				AssetDatabase.DeleteAsset(prefabName);
+				AssetDatabase.DeleteAsset(prefabPath);
 				GameObject prefab = PrefabUtility.SaveAsPrefabAsset(gameObject, prefabPath);
 				EditorGUIUtility.PingObject(prefab);
 			}, gameObject, tooltip);
