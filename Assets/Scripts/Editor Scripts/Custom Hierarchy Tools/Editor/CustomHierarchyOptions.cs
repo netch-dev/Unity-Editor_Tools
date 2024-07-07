@@ -21,6 +21,8 @@ namespace Netch.UtilityScripts {
 			DrawZoomInButton(instanceID, selectionRect, "Focus this game object");
 
 			DrawCreatePrefabButton(instanceID, selectionRect, "Save as prefab");
+
+			DrawDeleteButton(instanceID, selectionRect, "Delete");
 		}
 
 		private static Rect DrawRect(float x, float y, float size) {
@@ -114,6 +116,17 @@ namespace Netch.UtilityScripts {
 				AssetDatabase.DeleteAsset(prefabName);
 				GameObject prefab = PrefabUtility.SaveAsPrefabAsset(gameObject, prefabPath);
 				EditorGUIUtility.PingObject(prefab);
+			}, gameObject, tooltip);
+		}
+		#endregion
+
+		#region Delete Button
+		private static void DrawDeleteButton(int id, Rect rect, string tooltip) {
+			GameObject gameObject = EditorUtility.InstanceIDToObject(id) as GameObject;
+			if (gameObject == null) return;
+
+			DrawButtonWithTexture(rect.x + 210, rect.y + 2, 14, "delete", () => {
+				GameObject.DestroyImmediate(gameObject);
 			}, gameObject, tooltip);
 		}
 		#endregion
