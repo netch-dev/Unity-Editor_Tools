@@ -16,10 +16,33 @@ namespace Netch.UtilityScripts {
 
 			AddInfoScriptToGameObject(instanceID);
 			DrawInfoButton(instanceID, selectionRect, string.Empty);
+
+			DrawZoomInButton(instanceID, selectionRect, "Focus this game object");
 		}
 
 		private static Rect DrawRect(float x, float y, float size) {
 			return new Rect(x, y, size, size);
+		}
+
+		private static void DrawButtonWithTexture(float x, float y, float size, string name, Action action, GameObject gameObject, string tooltip) {
+			if (gameObject == null) return;
+
+			GUIStyle guiStyle = new GUIStyle();
+			guiStyle.fixedHeight = 0;
+			guiStyle.fixedWidth = 0;
+			guiStyle.stretchHeight = true; // Stretch the full height and width of the button
+			guiStyle.stretchWidth = true;
+
+			Rect rect = DrawRect(x, y, size);
+			Texture texture = Resources.Load(name) as Texture;
+
+			GUIContent guiContent = new GUIContent();
+			guiContent.image = texture;
+			guiContent.text = "";
+			guiContent.tooltip = tooltip;
+
+			bool isClicked = GUI.Button(rect, guiContent, guiStyle);
+			if (isClicked) action.Invoke();
 		}
 
 		#region Toggle Button
@@ -50,29 +73,6 @@ namespace Netch.UtilityScripts {
 			DrawButtonWithTexture(rect.x + 150, rect.y + 2, 14, "info", () => { }, gameObject, tooltip);
 		}
 
-		private static void DrawButtonWithTexture(float x, float y, float size, string name, Action action, GameObject gameObject, string tooltip) {
-			if (gameObject == null) return;
-
-			GUIStyle guiStyle = new GUIStyle();
-			guiStyle.fixedHeight = 0;
-			guiStyle.fixedWidth = 0;
-			guiStyle.stretchHeight = true; // Stretch the full height and width of the button
-			guiStyle.stretchWidth = true;
-
-			Rect rect = DrawRect(x, y, size);
-			Texture texture = Resources.Load(name) as Texture;
-
-			GUIContent guiContent = new GUIContent();
-			guiContent.image = texture;
-			guiContent.text = "";
-			guiContent.tooltip = tooltip;
-
-			bool isClicked = GUI.Button(rect, guiContent, guiStyle);
-			if (isClicked) {
-				action.Invoke();
-			}
-		}
-
 		private static void AddInfoScriptToGameObject(int id) {
 			GameObject gameObject = EditorUtility.InstanceIDToObject(id) as GameObject;
 			if (gameObject == null) return;
@@ -81,6 +81,18 @@ namespace Netch.UtilityScripts {
 			if (!hasInfoScriptComponent) {
 				gameObject.AddComponent<Info>();
 			}
+		}
+		#endregion
+
+		#region Zoom/Focus Button
+		private static void DrawZoomInButton(int id, Rect rect, string tooltip) {
+			GameObject gameObject = EditorUtility.InstanceIDToObject(id) as GameObject;
+			if (gameObject == null) return;
+
+			DrawButtonWithTexture(rect.x + 170, rect.y + 2, 14, "zoom_in", () => {
+				Selection.activeGameObject = gameObject;
+				SceneView.FrameLastActiveSceneView();
+			}, gameObject, tooltip);
 		}
 		#endregion
 	}
