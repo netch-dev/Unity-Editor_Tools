@@ -1,4 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Label text="Hello World! From UXML" />
-    <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" style="position: absolute; top: 381px; left: 55px; right: 55px;" />
+    <ui:Label text="Some example text..." />
+    <ui:Button text="Click me!"
+               display-tooltip-when-elided="true"
+               style="position: absolute; top: 379px; left: 130px;" />
 </ui:UXML>
