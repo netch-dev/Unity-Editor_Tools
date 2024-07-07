@@ -6,6 +6,15 @@ using System;
 using UnityEditor;
 
 namespace Netch.UtilityScripts {
+	/*
+	 * 5. Custom Hierarchy Tools - To each object in the hierarchy, add:
+     * 5.1 Checkbox to deactivate and activate them
+     * 5.2 Info icon that displays information when the cursor hovers over it
+     * 5.3 Button to focus on each object
+     * 5.4 Button to turn the gameobject into a prefab
+     * 5.5 Button to delete the gameobject
+     */
+
 	[InitializeOnLoad]
 	public class CustomHierarchyOptions {
 		static CustomHierarchyOptions() {
