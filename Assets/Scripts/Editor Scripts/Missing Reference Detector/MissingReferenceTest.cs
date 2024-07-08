@@ -1,5 +1,5 @@
 using UnityEngine;
 
 public class MissingReferenceTest : MonoBehaviour {
-	[SerializeField] private GameObject gameObject;
+	[SerializeField] private GameObject testGameObject;
 }
