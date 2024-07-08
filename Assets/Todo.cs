@@ -69,7 +69,11 @@ public class Todo {
      * 1. Name the editor script folder "Editor", so that the scripts aren't built into the final game
      * - https://docs.unity3d.com/Manual/SpecialFolders.html
      * 
-     * 2. 
-     *
+     * 2. A serialized object is a class that allows an Editor script to reference any Unity object or component in a completely generic way
+     * - https://docs.unity3d.com/ScriptReference/SerializedObject.html
+     * 2.1 A serialized property allows us to edit properties on serialized objects (Used in MissingReferenceDetector.cs)
+     * - https://docs.unity3d.com/ScriptReference/SerializedProperty.html
+     * 
+     * 3. 
      */
 }
