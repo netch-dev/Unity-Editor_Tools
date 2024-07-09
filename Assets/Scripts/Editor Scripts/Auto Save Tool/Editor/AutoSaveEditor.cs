@@ -16,15 +16,21 @@ public class AutoSaveEditor : EditorWindow {
 	private float saveTime = 1;
 	private float nextSave = 0;
 
-	public static bool IsEnabled {
+	public static bool IsAutoSaveEnabled {
 		get => EditorPrefs.GetBool(menuOption, false);
 		set => EditorPrefs.SetBool(menuOption, value);
 	}
 
+	public static bool IsDebugLoggingEnabled {
+		get => EditorPrefs.GetBool("EnableDebugLogs", false);
+		set => EditorPrefs.SetBool("EnableDebugLogs", value);
+	}
+
+
 	[MenuItem(menuOption, false, 175)]
 	public static void ToggleAutoSave() {
-		IsEnabled = !IsEnabled;
-		if (IsEnabled) {
+		IsAutoSaveEnabled = !IsAutoSaveEnabled;
+		if (IsAutoSaveEnabled) {
 			ShowWindow();
 		} else {
 			CloseWindow();
@@ -33,7 +39,7 @@ public class AutoSaveEditor : EditorWindow {
 
 	[MenuItem(menuOption, true)]
 	private static bool ToggleAutoSaveValidate() {
-		Menu.SetChecked(menuOption, IsEnabled);
+		Menu.SetChecked(menuOption, IsAutoSaveEnabled);
 		return true;
 	}
 
@@ -76,15 +82,18 @@ public class AutoSaveEditor : EditorWindow {
 			}
 		}
 
-		if (IsEnabled) {
+		IsDebugLoggingEnabled = EditorGUILayout.Toggle("Enable Debug Logs", IsDebugLoggingEnabled);
+		EditorPrefs.SetBool("EnableDebugLogs", IsDebugLoggingEnabled);
+
+		if (IsAutoSaveEnabled) {
 			if (EditorApplication.timeSinceStartup > nextSave) {
 				string[] path = EditorSceneManager.GetActiveScene().path.Split('/');
 				bool saveSuccess = EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), string.Join("/", path));
 				nextSave = (float)EditorApplication.timeSinceStartup + saveTime;
 				if (saveSuccess) {
-					Debug.Log("Auto Save: Saved successfully");
+					if (IsDebugLoggingEnabled) Debug.Log("Auto Save: Saved successfully");
 				} else {
-					Debug.LogError("Auto Save: Could not be saved");
+					if (IsDebugLoggingEnabled) Debug.LogError("Auto Save: Could not be saved");
 				}
 			}
 		}
