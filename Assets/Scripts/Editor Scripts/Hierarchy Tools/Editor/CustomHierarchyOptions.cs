@@ -21,17 +21,26 @@ namespace Netch.UtilityScripts {
 			EditorApplication.hierarchyWindowItemOnGUI += HierarchyWindowItemOnGUI;
 		}
 
+		private static string gameObjectName;
+		public static bool IsFavorited {
+			get => EditorPrefs.GetBool("favorite_" + gameObjectName, false);
+			set => EditorPrefs.SetBool("favorite_" + gameObjectName, value);
+		}
+
 		private static void HierarchyWindowItemOnGUI(int instanceID, Rect selectionRect) {
-			DrawActiveToggleButton(instanceID, selectionRect);
+			GameObject gameObject = EditorUtility.InstanceIDToObject(instanceID) as GameObject;
+			if (gameObject) {
+				gameObjectName = gameObject.name;
+				DrawActiveToggleButton(instanceID, selectionRect);
 
-			AddInfoScriptToGameObject(instanceID);
-			DrawInfoButton(instanceID, selectionRect, string.Empty);
+				AddInfoScriptToGameObject(instanceID);
+				DrawInfoButton(instanceID, selectionRect, string.Empty);
 
-			DrawZoomInButton(instanceID, selectionRect, "Focus this game object");
-
-			DrawCreatePrefabButton(instanceID, selectionRect, "Save as prefab");
-
-			DrawDeleteButton(instanceID, selectionRect, "Delete");
+				DrawZoomInButton(instanceID, selectionRect, "Focus this game object");
+				DrawCreatePrefabButton(instanceID, selectionRect, "Save as prefab");
+				DrawDeleteButton(instanceID, selectionRect, "Delete");
+				DrawFavoriteButton(instanceID, selectionRect, "Favorite");
+			}
 		}
 
 		private static Rect DrawRect(float x, float y, float size) {
@@ -137,6 +146,24 @@ namespace Netch.UtilityScripts {
 			DrawButtonWithTexture(rect.x + 210, rect.y + 2, 14, "delete", () => {
 				GameObject.DestroyImmediate(gameObject);
 			}, gameObject, tooltip);
+		}
+		#endregion
+
+		#region Favorite Button
+		private static void DrawFavoriteButton(int id, Rect rect, string tooltip) {
+			GameObject gameObject = EditorUtility.InstanceIDToObject(id) as GameObject;
+			if (gameObject == null) return;
+
+			if (IsFavorited) {
+				DrawButtonWithTexture(rect.x + 135, rect.y + 3, 10, "favorite_filled", () => {
+					IsFavorited = !IsFavorited;
+				}, gameObject, tooltip);
+			} else {
+				DrawButtonWithTexture(rect.x + 135, rect.y + 3, 10, "favorite_outline", () => {
+					IsFavorited = !IsFavorited;
+					FavoritesMenu.AddToFavorites(gameObject);
+				}, gameObject, tooltip);
+			}
 		}
 		#endregion
 	}
