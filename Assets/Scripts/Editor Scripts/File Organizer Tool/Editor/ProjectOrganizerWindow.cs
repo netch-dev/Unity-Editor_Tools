@@ -35,7 +35,7 @@ public class ProjectOrganizerWindow : EditorWindow {
 		InitializeFields();
 	}
 
-	[MenuItem("Window/Project Organizer Tool")]
+	[MenuItem("Custom Tools/Project Organizer Tool")]
 	public static void ShowWindow() {
 		EditorWindow window = GetWindow(typeof(ProjectOrganizerWindow));
 		GUIContent guiContent = new GUIContent("Project Organizer Tool");

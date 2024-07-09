@@ -7,7 +7,7 @@ namespace Netch.UtilityScripts {
 		private string batchNumber = "";
 		private bool showOptions = true;
 
-		[MenuItem("Window/Batch Rename")]
+		[MenuItem("Custom Tools/Batch Rename")]
 		public static void ShowWindow() {
 			EditorWindow editorWindow = GetWindow(typeof(BatchRenameToolWindow));
 			editorWindow.maxSize = new Vector2(500, 150);

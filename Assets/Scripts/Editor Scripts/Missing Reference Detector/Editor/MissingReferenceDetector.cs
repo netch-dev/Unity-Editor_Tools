@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 
 public class MissingReferenceDetector : EditorWindow {
-	[MenuItem("Window/Find Missing References")]
+	[MenuItem("Custom Tools/Find Missing References")]
 	public static void ShowWindow() {
 		EditorWindow window = GetWindow(typeof(MissingReferenceDetector));
 		window.maxSize = new Vector2(250, 100);

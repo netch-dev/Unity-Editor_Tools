@@ -17,29 +17,29 @@ public class FavoritesMenu : EditorWindow {
 		favoritedObjects.Add(prefab);
 	}
 
-	[MenuItem("Favorites/Favorite Object 1", false, 50)]
+	[MenuItem("Custom Tools/Favorites/Favorite Object 1", false, 50)]
 	private static void HandleFavoriteItem1Clicked() {
 		HandleFavoriteItemClicked(0);
 	}
-	[MenuItem("Favorites/Favorite Object 1", true)]
+	[MenuItem("Custom Tools/Favorites/Favorite Object 1", true)]
 	public static bool ValidateFavoriteItem1Option() {
 		return favoritedObjects.Count >= 1;
 	}
 
-	[MenuItem("Favorites/Favorite Object 2", false, 50)]
+	[MenuItem("Custom Tools/Favorites/Favorite Object 2", false, 50)]
 	private static void HandleFavoriteItem2Clicked() {
 		HandleFavoriteItemClicked(1);
 	}
-	[MenuItem("Favorites/Favorite Object 2", true)]
+	[MenuItem("Custom Tools/Favorites/Favorite Object 2", true)]
 	public static bool ValidateFavoriteItem2Option() {
 		return favoritedObjects.Count >= 2;
 	}
 
-	[MenuItem("Favorites/Favorite Object 3", false, 50)]
+	[MenuItem("Custom Tools/Favorites/Favorite Object 3", false, 50)]
 	private static void HandleFavoriteItem3Clicked() {
 		HandleFavoriteItemClicked(2);
 	}
-	[MenuItem("Favorites/Favorite Object 3", true)]
+	[MenuItem("Custom Tools/Favorites/Favorite Object 3", true)]
 	public static bool ValidateFavoriteItem3Option() {
 		return favoritedObjects.Count >= 3;
 	}
@@ -49,7 +49,7 @@ public class FavoritesMenu : EditorWindow {
 		favoritedObjects.Clear();
 	}
 
-	[MenuItem("Favorites/Clear Favorites", false, 100)]
+	[MenuItem("Custom Tools/Favorites/Clear Favorites", false, 100)]
 	private static void ClearFavoritesMenu() {
 		foreach (GameObject item in favoritedObjects) {
 			EditorPrefs.DeleteKey($"favorite_{item.name}");
