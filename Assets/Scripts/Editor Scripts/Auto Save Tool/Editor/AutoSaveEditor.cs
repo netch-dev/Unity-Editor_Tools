@@ -80,6 +80,8 @@ public class AutoSaveEditor : EditorWindow {
 					saveTime = 300;
 					break;
 			}
+
+			nextSave = (float)EditorApplication.timeSinceStartup + saveTime;
 		}
 
 		IsDebugLoggingEnabled = EditorGUILayout.Toggle("Enable Debug Logs", IsDebugLoggingEnabled);
